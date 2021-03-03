@@ -9,6 +9,24 @@ sudoku= np.zeros((9,9))
 x=0
 y=0
 
+def startlimit(x):
+    if(x>=0 and x<=2):
+        return 0
+    if(x>=3 and x<=5):
+        return 3
+    if(x>=6 and x<=8):
+        return 6
+
+def endlimit(x):
+    if(x>=0 and x<=2):
+        return 2
+    if(x>=3 and x<=5):
+        return 5
+    if(x>=6 and x<=8):
+        return 8
+
+
+
 
 def newsudoku(x,y):
     numbool=[True]*9
@@ -20,44 +38,11 @@ def newsudoku(x,y):
         if num+1 in sudoku.T[y]:
             numbool[num]=False
         
-        if(x>=0 and x<=2):
-            xstart=0
-            xend=2
-            if(y>=0 and y<=2):
-                ystart=0
-                yend=2
-            if(y>=3 and y<=5):
-                ystart=3
-                yend=5
-            if(y>=6 and y<=8):
-                ystart=6
-                yend=8
+        xstart=startlimit(x)
+        ystart=startlimit(y)
 
-        if(x>=3 and x<=5):
-            xstart=3
-            xend=5
-            if(y>=0 and y<=2):
-                ystart=0
-                yend=2
-            if(y>=3 and y<=5):
-                ystart=3
-                yend=5
-            if(y>=6 and y<=8):
-                ystart=6
-                yend=8
-
-        if(x>=6 and x<=8):
-            xstart=6
-            xend=8
-            if(y>=0 and y<=2):
-                ystart=0
-                yend=2
-            if(y>=3 and y<=5):
-                ystart=3
-                yend=5
-            if(y>=6 and y<=8):
-                ystart=6
-                yend=8
+        xend=endlimit(x)
+        yend=endlimit(y)
 
         for i in range(xstart,xend+1):
             for j in range(ystart,yend+1):
