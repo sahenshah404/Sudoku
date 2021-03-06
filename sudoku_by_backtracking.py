@@ -1,5 +1,6 @@
 from random import randrange,randint,random
 import numpy as np
+from tkinter import *
 numbers=[1,2,3,4,5,6,7,8,9]
 
 
@@ -28,6 +29,44 @@ def endlimit(x):
         return 5
     if(x>=6 and x<=8):
         return 8
+
+def inputgui():
+    arr=np.zeros((9,9))
+    tk=Tk()
+    tk.geometry("400x400")
+    z=0
+    a=["0"]*81
+    j=0
+    i=0
+    def sol():
+        k=0
+        for i in range(9):
+            for j in range(9):
+                arr[i][j]=a[k].get()            
+                k=k+1
+        tk.destroy()
+
+
+    for i in range(81):
+        a[i]=IntVar()
+    
+    y=0
+    b=IntVar()
+    for i in range(9):
+        for j in range(9):
+            x=Entry(tk,textvariable=a[y],width=5).grid(row=i,column=j,padx=4,ipady=5)
+            y=y+1
+            
+    Label(tk,text="Enter").grid(row=85)
+    Label(tk,text="your").grid(row=86)
+    Label(tk,text="sudoku").grid(row=87)
+    Button(tk,text="Show Sol",command=sol,width=7).grid(row=86,column=5)
+
+    print()
+    tk.mainloop()
+    for i in range(9):
+        for j in range(9):
+            sudoku[i][j]=arr[i][j]
 
 
 
@@ -105,10 +144,16 @@ print(" do you want to enter a sudoku puzzle and get its solution\t press 1\n")
 print(" or you want to get a sudoku puzzle and solve it \t Press 2")
 type=int(input())
 if(type==1):
-    for i in range(9):
-        for j in range(9):
-            sudoku[i][j]=int(input())
+    print("do you wanna give input in GUI press 1")
+    print("do you wanna give input in CLI press 2")
+    if(input()=='2'):
+        for i in range(9):
+            for j in range(9):
+                sudoku[i][j]=int(input())
+    else:
+        inputgui() 
 
+    x,y=0,0
     newsudoku(x,y,type)
     print(sudoku2)
 
@@ -116,7 +161,7 @@ if(type==2):
     newsudoku(x,y,type)
     print("Do you want a easy question or hard question")
     print("Press 1 for easy question  Press 2 for hard question")
-    if(input()==1):
+    if(input()=='1'):
         hard=False
     else:
         hard=True
