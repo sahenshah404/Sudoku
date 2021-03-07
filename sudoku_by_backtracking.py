@@ -8,6 +8,7 @@ numbers=[1,2,3,4,5,6,7,8,9]
 sudoku= np.zeros((9,9))
 sudoku2= np.zeros((9,9))
 qsudoku= np.zeros((9,9))
+arr=np.zeros((9,9))
 count=np.zeros(1)
 
 x=0
@@ -31,7 +32,6 @@ def endlimit(x):
         return 8
 
 def inputgui():
-    arr=np.zeros((9,9))
     tk=Tk()
     tk.geometry("400x400")
     z=0
@@ -139,7 +139,39 @@ def newsudoku(x,y,type):
                 if y==8:
                     newsudoku(x+1,0,type)
            
-    
+
+def outputgui():
+    tk=Tk()
+    var=IntVar()
+    for i in range(9):
+        for j in range(9):
+            x=Label(tk,text=int(sudoku2[i][j]),width=5).grid(row=i,column=j,padx=4,ipady=5)
+
+
+    tk.mainloop()
+
+def questiongui():
+    tk=Tk()
+    var=IntVar()
+    for i in range(9):
+        for j in range(9):
+            x=Label(tk,text=int(qsudoku[i][j]),width=5).grid(row=i,column=j,padx=4,ipady=5)
+
+
+    tk.mainloop()
+
+def solutiongui():
+    tk=Tk()
+    var=IntVar()
+    for i in range(9):
+        for j in range(9):
+            x=Label(tk,text=int(sudoku[i][j]),width=5).grid(row=i,column=j,padx=4,ipady=5)
+
+
+    tk.mainloop()
+
+
+
 print(" do you want to enter a sudoku puzzle and get its solution\t press 1\n")
 print(" or you want to get a sudoku puzzle and solve it \t Press 2")
 type=int(input())
@@ -155,7 +187,8 @@ if(type==1):
 
     x,y=0,0
     newsudoku(x,y,type)
-    print(sudoku2)
+    # print(sudoku2)
+    outputgui()
 
 if(type==2):
     newsudoku(x,y,type)
@@ -191,7 +224,8 @@ if(type==2):
             break
 
 
-    print(qsudoku)
+    # print(qsudoku)
+    questiongui()
 
     print()
     print("if you are unable to solve it")
@@ -202,4 +236,5 @@ if(type==2):
             for j in range(9):
                 sudoku[i][j]=qsudoku[i][j]
     newsudoku(x,y,1)
-    print(sudoku)
+    # print(sudoku)
+    solutiongui()
